@@ -103,11 +103,16 @@ public class PlayerMovement : MonoBehaviour
 
     public void Respawn()
     {
+
         transform.position = checkpoint.transform.position;
-        if(_holeCollider != null)
+
+        if (_holeCollider != null)
         {
+
             _holeCollider.isTrigger = false;
+
             _holeCollider = null;
+
         }
     }
 

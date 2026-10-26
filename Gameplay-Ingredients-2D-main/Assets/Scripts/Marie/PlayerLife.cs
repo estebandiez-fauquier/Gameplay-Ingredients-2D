@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -22,6 +23,10 @@ public class PlayerLife : MonoBehaviour
         _animator.SetTrigger("Hurt");
         _audioPlayer.PlayAudio(SoundFX.Hurt);
         UpdateUI();
+        if (_life <= 0)
+        {
+            Death();
+        }
     }
 
     public void Heal(int heal)
@@ -32,6 +37,15 @@ public class PlayerLife : MonoBehaviour
 
     private void UpdateUI()
     {
+
         lifeUI.fillAmount = (float)_life / maxLife;
+
     }
+
+    private void Death()
+    {
+        string active = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(active);
+    }
+
 }
