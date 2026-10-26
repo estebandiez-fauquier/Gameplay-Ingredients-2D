@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     private float horizontalMovement = 0;
     private bool jump = false, isGrounded = false;
+
+
     
     void Awake()
     {

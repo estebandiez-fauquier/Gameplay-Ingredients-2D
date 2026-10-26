@@ -7920,6 +7920,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1004435111}
     - target: {fileID: 2615417735691233723, guid: 72429d5e3d3e07f41a7c2478d56d6413, type: 3}
+      propertyPath: dashSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2615417735691233723, guid: 72429d5e3d3e07f41a7c2478d56d6413, type: 3}
       propertyPath: checkpoint
       value: 
       objectReference: {fileID: 625220141}
