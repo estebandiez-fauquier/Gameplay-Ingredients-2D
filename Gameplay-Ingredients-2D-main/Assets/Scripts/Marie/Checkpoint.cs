@@ -8,7 +8,9 @@ public class Checkpoint : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+
             collision.GetComponent<PlayerMovement>().ChangeCheckpoint(this);
+
         }
     }
 }
