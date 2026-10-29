@@ -17,9 +17,20 @@ public class QuizManager : MonoBehaviour
     public TMP_Text[] textesReponses;
 
     public int questionActuelle = 0;
+    public bool quizActive = false;
 
     void Start()
     {
+        texteQuestion.text = "";
+        foreach (TMP_Text texte in textesReponses)
+        {
+            texte.text = "";
+        }
+    }
+
+    public void ActiverQuiz()
+    {
+        quizActive = true;
         AfficherQuestion();
     }
 
@@ -43,7 +54,7 @@ public class QuizManager : MonoBehaviour
 
     public bool VerifierReponse(int choix)
     {
-        if (questionActuelle >= questions.Length)
+        if (!quizActive || questionActuelle >= questions.Length)
             return false;
 
         if (choix == questions[questionActuelle].bonneReponse)

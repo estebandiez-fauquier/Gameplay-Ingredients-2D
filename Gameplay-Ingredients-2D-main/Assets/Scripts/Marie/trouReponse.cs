@@ -14,8 +14,8 @@ public class TrouReponse : MonoBehaviour
 
         if (!correct)
         {
-            // Appelle ici la fonction de respawn
-            // de ton système de checkpoints existant.
+            GameObject.FindWithTag("Player").GetComponent<PlayerMovement>().Respawn();
+            GameObject.FindWithTag("Player").GetComponent<PlayerLife>().Hurt(1);
         }
     }
 }
