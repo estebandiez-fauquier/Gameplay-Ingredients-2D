@@ -22,8 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalMovement = 0;
     private bool jump = false, isGrounded = false;
 
+    public GameObject grenadePrefab;
 
-    
+
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -39,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMovement = -_speed;
             _spriteRenderer.flipX = true;
-        }else if (Input.GetKey(KeyCode.D))
+        }
+        else if (Input.GetKey(KeyCode.D))
         {
             horizontalMovement = _speed;
             _spriteRenderer.flipX = false;
@@ -48,12 +50,12 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontalMovement = 0;
         }
-        
+
         _animator.SetBool("Walk", (horizontalMovement != 0 && isGrounded));
         transform.position += new Vector3(horizontalMovement * Time.deltaTime, 0, 0);
 
         CheckGround();
-        
+
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             jump = true;
@@ -61,7 +63,11 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Jump", true);
             _audioPlayer.PlayAudio(SoundFX.Jump);
         }
-        
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.Q))
+        {
+            lauchGrenade();
+        }
     }
 
     private void FixedUpdate()
@@ -170,5 +176,25 @@ public class PlayerMovement : MonoBehaviour
         checkpoint = newCheckpoint;
     }
 
+    public void lauchGrenade()
+    {
+        Instantiate(
+                        grenadePrefab,
+                        feet.transform.position,
+                        Quaternion.identity
+                    );
+    }
 
+    
+    public void grenadeRepulse(Transform grenade)
+    {
+        Vector3 direction = feet.transform.position - grenade.transform.position;
+        float distance = direction.magnitude;
+        if (distance <= 3)
+        {
+        direction.Normalize();
+        _rigidbody.AddForce(direction * 20f, ForceMode2D.Impulse);
+        }
+        
+    }
 }
