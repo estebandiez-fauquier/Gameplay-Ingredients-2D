@@ -1,16 +1,17 @@
+
 using UnityEngine;
 
-public class questionActive : MonoBehaviour
+public class ActivationQuiz : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public QuizManager quizManager;
+    private bool active = false;
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (active || !other.CompareTag("Player"))
+            return;
+
+        active = true;
+        quizManager.ActiverQuiz();
     }
 }
